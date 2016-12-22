@@ -20,6 +20,11 @@ public class LessonPresenter implements LessonProvidedPresenterOps, LessonRequir
     }
 
     @Override
+    public void setView(LessonRequiredViewOps view) {
+        this.view = view;
+    }
+
+    @Override
     public void loadDataRequest() {
         model.loadData();
     }

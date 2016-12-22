@@ -10,9 +10,10 @@ import android.widget.ImageButton;
 import com.learning.sample.robotiumtest.R;
 import com.learning.sample.robotiumtest.lesson.LessonActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainRequiredViewOps{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainRequiredViewOps {
 
     private MainProvidedPresenterOps providedPresenterOps;
+    private MainStateMaintainer stateMaintainer;
 
     ImageButton btnLogin;
 
@@ -20,21 +21,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnLogin = (ImageButton)findViewById(R.id.btn_login);
+        btnLogin = (ImageButton) findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(this);
+        initStateMaintainer();
         setupMVP();
     }
 
-    private void setupMVP(){
-        MainPresenter presenter = new MainPresenter(this);
-        MainModel model = new MainModel(presenter);
-        presenter.setModel(model);
-        providedPresenterOps = presenter;
+    private void initStateMaintainer() {
+        stateMaintainer = MainStateMaintainer.getInstance();
+    }
+
+    private void setupMVP() {
+        if (stateMaintainer.checkExist()) {
+            providedPresenterOps = stateMaintainer.getPresenter();
+            providedPresenterOps.setView(this);
+        } else {
+            MainPresenter presenter = new MainPresenter(this);
+            MainModel model = new MainModel(presenter);
+            presenter.setModel(model);
+            providedPresenterOps = presenter;
+            stateMaintainer.setPresenter(presenter);
+        }
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.btn_login){
+        if (view.getId() == R.id.btn_login) {
             providedPresenterOps.clickLoginButtonRequest();
         }
     }
@@ -49,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return this;
     }
 
-    public void login(){
+    public void login() {
         Intent phoneIntent = new Intent(MainActivity.this, LessonActivity.class);
         startActivity(phoneIntent);
     }

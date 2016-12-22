@@ -5,6 +5,7 @@ package com.learning.sample.robotiumtest.lesson;
  */
 
 public interface LessonProvidedPresenterOps {
+    void setView(LessonRequiredViewOps view);
     void loadDataRequest();
     void clickLessonRequest(int position);
 }

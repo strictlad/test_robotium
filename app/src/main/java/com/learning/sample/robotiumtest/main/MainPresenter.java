@@ -18,6 +18,11 @@ public class MainPresenter implements MainProvidedPresenterOps, MainRequiredPres
     }
 
     @Override
+    public void setView(MainRequiredViewOps view) {
+        this.view = view;
+    }
+
+    @Override
     public void clickLoginButtonRequest() {
         model.login();
     }
