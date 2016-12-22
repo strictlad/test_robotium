@@ -5,5 +5,6 @@ package com.learning.sample.robotiumtest.main;
  */
 
 public interface MainProvidedPresenterOps {
+    void setView(MainRequiredViewOps view);
     void clickLoginButtonRequest();
 }

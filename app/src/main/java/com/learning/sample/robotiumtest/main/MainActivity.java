@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setupMVP() {
         if (stateMaintainer.checkExist()) {
             providedPresenterOps = stateMaintainer.getPresenter();
+            providedPresenterOps.setView(this);
         } else {
             MainPresenter presenter = new MainPresenter(this);
             MainModel model = new MainModel(presenter);

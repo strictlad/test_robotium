@@ -44,6 +44,7 @@ public class LessonActivity extends AppCompatActivity implements LessonRequiredV
     private void setupMVP() {
         if (stateMaintainer.checkExist()) {
             providedPresenterOps = stateMaintainer.getPresenter();
+            providedPresenterOps.setView(this);
         } else {
             LessonPresenter presenter = new LessonPresenter(this);
             LessonModel model = new LessonModel(presenter);
