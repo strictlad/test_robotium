@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minHeight="?attr/listPreferredItemHeight"
-    android:mode="twoLine"
     android:paddingLeft="?attr/listPreferredItemPaddingLeft"
     android:paddingRight="?attr/listPreferredItemPaddingRight"
     >
@@ -23,4 +22,13 @@
         android:textAppearance="?attr/textAppearanceListItemSmall"
         android:text="no description"
         />
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/btn1"
+        android:layout_below="@+id/item_lesson_content" />
+
 </RelativeLayout>

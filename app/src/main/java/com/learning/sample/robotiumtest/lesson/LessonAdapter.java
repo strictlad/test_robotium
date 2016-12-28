@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.learning.sample.robotiumtest.R;
@@ -45,7 +47,7 @@ public class LessonAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
+    public View getView(final int position, View view, ViewGroup viewGroup) {
         View convertView = view;
         ViewHolder holder;
         if (convertView == null) {
@@ -53,6 +55,7 @@ public class LessonAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.txtTitle = (TextView) convertView.findViewById(R.id.item_lesson_title);
             holder.txtContent = (TextView) convertView.findViewById(R.id.item_lesson_content);
+            holder.btn1 = (Button) convertView.findViewById(R.id.btn1);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -60,6 +63,19 @@ public class LessonAdapter extends BaseAdapter {
 
         holder.txtTitle.setText(data.get(position).getTitle());
         holder.txtContent.setText(data.get(position).getContent());
+        holder.btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Click to btn in item: " + (position+1), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Start with " + data.get(position).getContent(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return convertView;
     }
@@ -67,5 +83,6 @@ public class LessonAdapter extends BaseAdapter {
     class ViewHolder {
         TextView txtTitle;
         TextView txtContent;
+        Button btn1;
     }
 }
